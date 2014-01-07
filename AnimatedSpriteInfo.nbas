@@ -1,0 +1,34 @@
+# Author: Bob Rubbens - Knights of the Compiler
+# Creation date: di 07-01-2014
+# Contact: http://plusminos.nl - @broervanlisa - gmail (bobrubbens)
+
+# Some notes:
+# Spaces don't matter. They are removed from each line before the line is actually parsed.
+# The order of the settings doesn't matter, as long as you follow the format outlined below. 
+# And as you might have noticed, comments are done by beginning the line with a hashtag (#)
+
+# Path to the spritesheet
+# This is not mandatory. You can also supply this later on at runtime, to avoid having to load one texture multiple times
+spritesheet:block_b_startingspinning.png
+
+# Size of the actual sprite in width,height
+spritesize:139,197
+
+# Origin of the sprite in x,y (offset)
+origin:0,0
+
+# The amount of sprites in horizontal,vertical
+gridsize:6,2
+
+# Format of an animation:
+# animation: name & frames * milliseconds between frames > animation that comes after this
+# The successor animation is optional. If left out, the animation will loop.
+
+# Types of framesets you can make:
+# 2-5: will make an animation consisting of frame 2, 3, 4 & 5
+# 8,9,10,11: will make an animation consisting of frame 8, 9, 10, 11
+# Frames are picked from left to right, top to bottom
+
+animation: spinning1 & 0-11 * 10
+animation: spinning2 & 0-11 * 10 > spinning1
+animation: spinning3 & 0,1,2,3,4,5,6,7,8,9,10,11 * 10
