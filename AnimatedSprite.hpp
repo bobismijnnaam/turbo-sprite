@@ -28,7 +28,6 @@ namespace nb {
 	public:
 		// Loads an animated sprite using an external configuration file
 		// Sets initial frame to the first frame
-		// See example file for more details
 		AnimatedSprite(std::string config);
 		~AnimatedSprite();
 
@@ -51,11 +50,14 @@ namespace nb {
 		// Sets the sprite to a certain frame and pauses it
 		void set(int frame);
 
+		// Returns the name of the current animation
+		std::string getAnimation();
+
 	private:
 		// Contains the individual animations
 		std::unordered_map<std::string, Animation> animations;
 		// Contains the animations to be played
-		std::queue animationQueue;
+		std::queue<std::string> animationQueue;
 
 		// The spritesheet 
 		sf::Texture* spritesheet;
@@ -67,13 +69,18 @@ namespace nb {
 
 		// The current animation
 		Animation currentAnimation;
+		// The name of the current animation
+		std::string animationName;
 		// The current frame
 		int currentFrame;
 
 		// Whether an animation is playing right now or not
 		bool playing;
 		// How much time has elapsed since the last frame switch
-		sf::Time elapsed;
+		float elapsedTime;
+
+		// The part of the spritesheet which is rendered to the screen
+		sf::VertexArray part;
 	};
 
 }
