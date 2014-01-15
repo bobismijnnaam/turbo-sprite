@@ -2,8 +2,9 @@ include_rules
 
 CFLAGS += -lsfml-graphics -lsfml-window -lsfml-system 
 # CFLAGS += -lBox2D
+CFLAGS += -ltinyxml2
 CFLAGS += -std=c++0x
-PROGRAM = fuzzy-path
+PROGRAM = animated-sprite-test
 
 : foreach *.cpp |> !cxx |> 
 : obj\*.o |> g++ %f -o %o $(CFLAGS) |> bin/$(PROGRAM).exe

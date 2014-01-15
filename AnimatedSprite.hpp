@@ -11,11 +11,13 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <tinyxml2.h>
 
  // Includes I did make myself
 
 namespace nb {
 	struct Animation {
+		std::string name;
 		// The collection of frames stored as 2d coordinates
 		std::vector<sf::Vector2i> frames;
 		// The time between the frames
@@ -32,10 +34,10 @@ namespace nb {
 		~AnimatedSprite();
 
 		// Sets the spritesheet to be used for rendering. Removes the previous spritesheet
-		void setSpriteSheet(sf::Texture* inputSpritesheet);
+		void setSpriteSheet(sf::Texture& inputSpritesheet);
 
 		// Performs the logic of the animated sprite (mostly just updating the animation/frame)
-		void logic(float dt);
+		void logic(int dt);
 		// Draws the animated sprite
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -54,6 +56,14 @@ namespace nb {
 		std::string getAnimation();
 
 	private:
+		// To parse the XML file
+		void handleXML(tinyxml2::XMLElement* e);
+		// To parse an animation element
+		std::vector<int> handleAnimation(tinyxml2::XMLElement* e);
+
+		// To make update the view on the spritesheet
+		void updateVertexes();
+
 		// Contains the individual animations
 		std::unordered_map<std::string, Animation> animations;
 		// Contains the animations to be played
@@ -61,26 +71,26 @@ namespace nb {
 
 		// The spritesheet 
 		sf::Texture* spritesheet;
+		bool deleteSpritesheetTexture;
+		// The spritesheet location
+		std::string spritesheetSource;
 		// The size of the sprite
 		sf::Vector2f spriteSize;
-		// The amount of frames over the width & height of the spritesheet
-		// (The amount that fits in along the x & y axis)
+		// The amount of frames over the width & height of the spritesheet (The amount that fits in along the x & y axis)
 		sf::Vector2f gridSize;
 
 		// The current animation
 		Animation currentAnimation;
-		// The name of the current animation
-		std::string animationName;
 		// The current frame
 		int currentFrame;
 
 		// Whether an animation is playing right now or not
 		bool playing;
-		// How much time has elapsed since the last frame switch
-		float elapsedTime;
+		// How much time has elapsed since the last frame switch. Milliseconds!
+		int elapsedTime;
 
 		// The part of the spritesheet which is rendered to the screen
-		sf::VertexArray part;
+		// sf::VertexArray part;
 	};
 
 }

@@ -1,0 +1,16 @@
+<!--
+Author: Bob Rubbens - Knights of the Compiler
+Creation date: di 16-01-2014
+Contact: http://plusminos.nl - @broervanlisa - gmail (bobrubbens) 
+-->
+
+<spritesheet>
+	<src>firebog.png</src>
+	<origin x="82" y="106" />
+	<size x="164" y="212" />
+	<gridsize x="6" y="4" />
+	
+	<animation name="idle" delay="100">
+		<frames start="0" end="22" />
+	</animation>
+</spritesheet>
